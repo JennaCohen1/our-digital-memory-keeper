@@ -11,7 +11,7 @@ const CreateStory = () => {
   const navigate = useNavigate();
   const { addStory } = useStories();
 
-  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
 
