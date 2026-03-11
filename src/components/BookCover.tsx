@@ -18,7 +18,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
         {/* Back page */}
         <div className="book-back-page">
           <div className="h-full flex flex-col justify-end p-10 pb-20 bg-foreground">
-            <p className="font-body text-lg font-bold text-background uppercase tracking-wide leading-snug max-w-[300px] text-left">
+            <p className="font-body text-lg font-bold text-background tracking-wide leading-snug max-w-[300px] text-left">
               "If you can fill the unforgiving minute,<br />
               With sixty seconds' worth of distance run,<br />
               Yours is the earth and everything that's in it..."
