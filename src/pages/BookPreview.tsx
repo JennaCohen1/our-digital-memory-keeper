@@ -164,10 +164,44 @@ const BookPreview = () => {
                       <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${expandedYears[year] ? "rotate-180" : ""}`} />
                     </button>
                     {expandedYears[year] && (
-                      <div className="pl-4 py-1 space-y-1">
-                        {titles.map((title, i) => (
-                          <p key={i} className="font-body text-sm text-muted-foreground py-0.5">{title}</p>
-                        ))}
+                      <div className="pl-4 py-1 space-y-0">
+                        {titles.map((title, i) => {
+                          const pageIndex = pages.findIndex(
+                            (p) => (p.type === "album" || p.type === "story") && p.title === title
+                          );
+                          return (
+                            <div
+                              key={i}
+                              draggable
+                              onDragStart={() => setDragState({ year, index: i })}
+                              onDragOver={(e) => e.preventDefault()}
+                              onDrop={() => {
+                                if (dragState && dragState.year === year && dragState.index !== i) {
+                                  const arr = [...tocData[year]];
+                                  const [moved] = arr.splice(dragState.index, 1);
+                                  arr.splice(i, 0, moved);
+                                  tocData[year] = arr;
+                                }
+                                setDragState(null);
+                              }}
+                              onDragEnd={() => setDragState(null)}
+                              className={`flex items-center py-1.5 cursor-grab active:cursor-grabbing rounded transition-colors ${
+                                dragState?.year === year && dragState?.index === i ? "opacity-50" : ""
+                              }`}
+                            >
+                              <span className="text-muted-foreground/40 mr-2 text-xs">⠿</span>
+                              <button
+                                className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors text-left"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (pageIndex >= 0) jumpToPage(pageIndex);
+                                }}
+                              >
+                                {title}
+                              </button>
+                            </div>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
