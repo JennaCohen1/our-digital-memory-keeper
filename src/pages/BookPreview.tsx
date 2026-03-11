@@ -106,8 +106,8 @@ const BookPreview = () => {
     switch (page.type) {
       case "cover":
         return (
-          <div className="h-full flex flex-col items-center justify-end pb-16">
-            <div className="w-[80%]" style={{ fontSize: 'clamp(3rem, 15vw, 6rem)', lineHeight: 1.1 }}>
+          <div className="h-full flex flex-col items-center justify-end px-10 pb-16">
+            <div className="w-full" style={{ fontSize: 'clamp(4rem, 18vw, 8rem)', lineHeight: 1.1 }}>
               {["CHR", "IST", "IAN", "SON"].map((row, ri) => (
                 <div key={ri} className="flex justify-between">
                   {row.split("").map((letter, ci) => (
@@ -122,7 +122,7 @@ const BookPreview = () => {
                 </div>
               ))}
             </div>
-            <p className="absolute bottom-8 left-0 right-0 text-center font-display text-xs italic text-foreground">
+            <p className="absolute bottom-6 left-0 right-0 text-center font-display text-sm italic text-foreground">
               8.7.1978
             </p>
           </div>
@@ -130,13 +130,13 @@ const BookPreview = () => {
 
       case "quote":
         return (
-          <div className="h-full flex flex-col justify-end p-12 pb-20 bg-foreground">
-            <p className="font-body text-sm font-bold text-background tracking-normal leading-snug text-left whitespace-nowrap">
+          <div className="h-full flex flex-col justify-end p-10 pb-20 bg-foreground">
+            <p className="font-body text-lg font-bold text-background tracking-normal leading-snug max-w-[300px] text-left">
               "If you can fill the unforgiving minute,<br />
               With sixty seconds' worth of distance run,<br />
               Yours is the earth and everything that's in it..."
             </p>
-            <p className="font-body text-xs font-bold text-background tracking-wide mt-5 text-right">
+            <p className="font-body text-sm font-bold text-background tracking-wide mt-6 text-right">
               —Rudyard Kipling
             </p>
           </div>
