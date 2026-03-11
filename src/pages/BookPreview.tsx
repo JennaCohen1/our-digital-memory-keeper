@@ -65,7 +65,8 @@ const BookPreview = () => {
   const navigate = useNavigate();
   const { albums } = useAlbums();
   const { stories } = useStories();
-  const pages = buildPages(albums, stories);
+  const { pages, tocData } = buildPages(albums, stories);
+  const [expandedYears, setExpandedYears] = useState<Record<string, boolean>>({});
 
   const [currentPage, setCurrentPage] = useState(0);
   const [isFlipping, setIsFlipping] = useState(false);
