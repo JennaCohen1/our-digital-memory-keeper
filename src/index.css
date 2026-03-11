@@ -156,3 +156,43 @@
   transform: rotateY(-165deg);
   pointer-events: none;
 }
+
+/* Book preview / page-flip */
+.book-preview-scene {
+  perspective: 1500px;
+}
+
+.book-preview-container {
+  position: relative;
+  width: min(400px, 80vw);
+  aspect-ratio: 3 / 4;
+}
+
+.book-page {
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--card));
+  border-radius: 2px;
+  box-shadow: 0 4px 24px -8px hsl(0 0% 0% / 0.4);
+  overflow: hidden;
+  transform-origin: left center;
+  backface-visibility: hidden;
+}
+
+@keyframes page-flip-out {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(-180deg); }
+}
+
+@keyframes page-flip-in {
+  0% { transform: rotateY(180deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+.page-flip-out {
+  animation: page-flip-out 0.6s ease-in-out forwards;
+}
+
+.page-flip-in {
+  animation: page-flip-in 0.6s ease-in-out forwards;
+}

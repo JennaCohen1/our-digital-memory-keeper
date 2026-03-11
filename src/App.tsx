@@ -8,6 +8,7 @@ import Memories from "./pages/Memories.tsx";
 import CreateAlbum from "./pages/CreateAlbum.tsx";
 import CreateStory from "./pages/CreateStory.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import BookPreview from "./pages/BookPreview.tsx";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/memories" element={<Memories />} />
           <Route path="/add/album" element={<CreateAlbum />} />
           <Route path="/add/story" element={<CreateStory />} />
+          <Route path="/preview" element={<BookPreview />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

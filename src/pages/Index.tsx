@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, ImagePlus, PenLine, Mic } from "lucide-react";
+import { BookOpen, ImagePlus, PenLine, Mic, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import BookCover from "@/components/BookCover";
@@ -58,6 +58,12 @@ const Index = () => {
             <Button size="lg" variant="outline" className="text-base px-8">
               <PenLine className="w-4 h-4 mr-2" />
               Write a Story
+            </Button>
+          </Link>
+          <Link to="/preview">
+            <Button size="lg" variant="outline" className="text-base px-8">
+              <Eye className="w-4 h-4 mr-2" />
+              Preview Draft
             </Button>
           </Link>
         </div>
