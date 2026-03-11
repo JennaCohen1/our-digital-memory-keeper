@@ -23,6 +23,7 @@ const App = () => (
           <Route path="/memories" element={<Memories />} />
           <Route path="/add/album" element={<CreateAlbum />} />
           <Route path="/add/story" element={<CreateStory />} />
+          <Route path="/preview" element={<BookPreview />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
