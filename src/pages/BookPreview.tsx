@@ -77,13 +77,13 @@ const BookPreview = () => {
       case "cover":
         return (
           <div className="h-full flex flex-col items-center justify-center">
-            <div className="w-full max-w-[200px]" style={{ lineHeight: 0.85 }}>
+            <div className="w-[75%]" style={{ lineHeight: 0.85 }}>
               {["CHR", "IST", "IAN", "SON"].map((row, ri) => (
                 <div key={ri} className="flex justify-between">
                   {row.split("").map((letter, ci) => (
                     <span
                       key={ci}
-                      className="font-display text-4xl sm:text-5xl font-bold text-foreground uppercase text-center"
+                      className="font-display text-6xl sm:text-7xl font-bold text-foreground uppercase text-center"
                       style={{ width: "1em" }}
                     >
                       {letter}
