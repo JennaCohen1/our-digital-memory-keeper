@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, ImagePlus, PenLine, Mic } from "lucide-react";
+import { BookOpen, ImagePlus, PenLine, Mic, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import BookCover from "@/components/BookCover";
