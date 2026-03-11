@@ -133,7 +133,7 @@
   border: 1px solid hsl(var(--border));
 }
 
-.book-cover {
+.book-cover-cream {
   position: absolute;
   inset: 0;
   cursor: pointer;
@@ -142,14 +142,17 @@
   transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
   overflow: hidden;
   border-radius: 0 4px 4px 0;
-  background: hsl(var(--foreground));
+  background: hsl(33 20% 92%);
+  box-shadow:
+    2px 4px 16px -4px hsl(30 15% 40% / 0.12),
+    inset 0 0 0 1px hsl(30 10% 85%);
 }
 
-.book-cover:hover {
+.book-cover-cream:hover {
   transform: rotateY(-8deg);
 }
 
-.book-opened .book-cover {
+.book-opened .book-cover-cream {
   transform: rotateY(-165deg);
   pointer-events: none;
 }
