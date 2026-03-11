@@ -45,7 +45,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
               ))}
             </div>
 
-            <p className="font-body text-[10px] font-normal tracking-[0.3em] uppercase text-foreground mt-6">
+            <p className="font-display text-sm italic text-foreground mt-6">
               8.7.1978
             </p>
           </div>
