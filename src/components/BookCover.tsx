@@ -31,11 +31,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
 
           <div className="relative z-10 h-full flex flex-col items-center justify-center px-12 text-center">
             <h1 className="font-display text-5xl sm:text-6xl font-medium text-warm-gold tracking-[0.04em] leading-[1.15] uppercase">
-              Our
-              <br />
-              Memory
-              <br />
-              Book
+              Christianson
             </h1>
 
             <div className="w-10 h-px bg-warm-gold/30 my-8" />
