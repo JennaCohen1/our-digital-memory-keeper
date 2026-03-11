@@ -106,15 +106,15 @@ const BookPreview = () => {
     switch (page.type) {
       case "cover":
         return (
-          <div className="h-full flex flex-col items-center justify-center">
-            <div className="w-[75%]" style={{ lineHeight: 0.85 }}>
+          <div className="h-full flex flex-col items-center justify-center -mt-10">
+            <div className="w-[80%]" style={{ fontSize: 'clamp(3rem, 15vw, 6rem)', lineHeight: 0.85 }}>
               {["CHR", "IST", "IAN", "SON"].map((row, ri) => (
                 <div key={ri} className="flex justify-between">
                   {row.split("").map((letter, ci) => (
                     <span
                       key={ci}
-                      className="font-display text-6xl sm:text-7xl font-bold text-foreground uppercase text-center"
-                      style={{ width: "1em" }}
+                      className="font-display font-bold text-foreground uppercase inline-block"
+                      style={{ width: "1em", textAlign: "center" }}
                     >
                       {letter}
                     </span>
@@ -122,7 +122,7 @@ const BookPreview = () => {
                 </div>
               ))}
             </div>
-            <p className="font-display text-xs italic text-foreground mt-4">
+            <p className="absolute bottom-8 left-0 right-0 text-center font-display text-xs italic text-foreground">
               8.7.1978
             </p>
           </div>
