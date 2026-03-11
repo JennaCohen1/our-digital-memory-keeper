@@ -1,12 +1,12 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAlbums, useStories } from "@/hooks/useMemories";
 import { Album, Story } from "@/lib/types";
 
 interface BookPage {
-  type: "cover" | "quote" | "album" | "story" | "end";
+  type: "cover" | "quote" | "contents" | "album" | "story" | "end";
   title?: string;
   content?: string;
   photos?: { imageData: string; caption?: string }[];
