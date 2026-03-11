@@ -101,7 +101,7 @@ const BookPreview = () => {
       case "quote":
         return (
           <div className="h-full flex flex-col justify-end p-12 pb-20 bg-foreground">
-            <p className="font-body text-base font-bold text-background uppercase tracking-wide leading-snug max-w-[260px] text-left">
+            <p className="font-body text-base font-bold text-background tracking-wide leading-snug max-w-[260px] text-left">
               "If you can fill the unforgiving minute,
               <br />
               With sixty seconds' worth of distance run,
