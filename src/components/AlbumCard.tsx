@@ -1,4 +1,5 @@
 import { Album } from "@/lib/types";
+import { formatMemoryDate } from "@/lib/dateUtils";
 import { Calendar, Trash2, Image } from "lucide-react";
 
 interface AlbumCardProps {
