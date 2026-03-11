@@ -72,6 +72,19 @@ const BookPreview = () => {
   const [isFlipping, setIsFlipping] = useState(false);
   const [flipDirection, setFlipDirection] = useState<"next" | "prev">("next");
 
+  const jumpToPage = useCallback(
+    (pageIndex: number) => {
+      if (isFlipping || pageIndex === currentPage) return;
+      setFlipDirection(pageIndex > currentPage ? "next" : "prev");
+      setIsFlipping(true);
+      setTimeout(() => {
+        setCurrentPage(pageIndex);
+        setIsFlipping(false);
+      }, 600);
+    },
+    [currentPage, isFlipping]
+  );
+
   const goToPage = useCallback(
     (direction: "next" | "prev") => {
       if (isFlipping) return;
