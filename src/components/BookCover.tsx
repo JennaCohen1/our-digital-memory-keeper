@@ -17,14 +17,14 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
       <div className={`book-container ${isOpening ? "book-opened" : ""}`}>
         {/* Back page */}
         <div className="book-back-page">
-          <div className="h-full flex flex-col items-center justify-center p-10 text-center">
-            <p className="font-body text-sm font-light text-muted-foreground leading-relaxed max-w-[280px] tracking-wide">
+          <div className="h-full flex flex-col items-center justify-end p-10 pb-20 text-center bg-foreground">
+            <p className="font-body text-lg font-bold text-background uppercase tracking-wide leading-snug max-w-[300px]">
               "If you can fill the unforgiving minute...<br />
               With sixty seconds' worth of distance run...<br />
               Yours is the Earth and everything that's in it..."
             </p>
-            <p className="font-body text-[9px] tracking-[0.2em] uppercase text-muted-foreground/60 mt-4">
-              — Rudyard Kipling
+            <p className="font-body text-sm font-bold text-background uppercase tracking-wide mt-6">
+              —Rudyard Kipling
             </p>
           </div>
         </div>
