@@ -55,7 +55,7 @@ const CreateAlbum = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || photos.length === 0) return;
+    const date = year ? (month && month !== "none" ? `${year}-${month}` : year) : undefined;
     addAlbum({ title, date, photos });
     navigate("/memories");
   };
