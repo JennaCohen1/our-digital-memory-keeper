@@ -29,7 +29,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
           {/* Subtle spine shadow */}
           <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-foreground/[0.04] to-transparent" />
 
-          <div className="relative z-10 h-full flex flex-col items-start justify-end px-10 pb-14 text-left">
+          <div className="relative z-10 h-full flex flex-col items-end justify-end px-10 pb-14 text-right">
             <h1 className="font-display text-7xl sm:text-8xl font-bold text-foreground tracking-[0.05em] leading-[0.85] uppercase">
               Chr<br />ist<br />ian<br />son
             </h1>
