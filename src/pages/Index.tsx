@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { BookOpen, ImagePlus, PenLine, Mic } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
+import BookCover from "@/components/BookCover";
 
 const features = [
   {
@@ -27,8 +29,14 @@ const features = [
 ];
 
 const Index = () => {
+  const [bookOpened, setBookOpened] = useState(false);
+
+  if (!bookOpened) {
+    return <BookCover onOpen={() => setBookOpened(true)} />;
+  }
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background animate-fade-in">
       <Header />
 
       {/* Hero */}
