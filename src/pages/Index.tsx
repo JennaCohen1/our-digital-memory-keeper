@@ -8,13 +8,13 @@ import BookCover from "@/components/BookCover";
 const features = [
   {
     icon: ImagePlus,
-    title: "Scan & Import Photos",
-    description: "Upload old photographs or snap new ones to preserve every moment.",
+    title: "Photo Albums",
+    description: "Upload batches of photos, group them into albums, and add captions.",
   },
   {
     icon: PenLine,
-    title: "Write Stories",
-    description: "Capture memories in your own words — from quick captions to long-form stories.",
+    title: "Written Stories",
+    description: "Write standalone memories — no photo needed. Every detail matters.",
   },
   {
     icon: Mic,
@@ -39,12 +39,7 @@ const Index = () => {
     <div className="min-h-screen bg-background animate-fade-in">
       <Header />
 
-      {/* Hero */}
       <section className="container mx-auto px-4 pt-20 pb-16 text-center max-w-3xl">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent text-accent-foreground text-sm font-medium mb-6">
-          <BookOpen className="w-4 h-4" />
-          A place for family memories
-        </div>
         <h1 className="font-display text-5xl sm:text-6xl font-bold text-foreground leading-tight mb-6">
           Every family has a story worth keeping
         </h1>
@@ -53,20 +48,21 @@ const Index = () => {
           precious memories — all in one beautiful place.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/add">
+          <Link to="/add/album">
             <Button size="lg" className="text-base px-8">
-              Start Adding Memories
+              <ImagePlus className="w-4 h-4 mr-2" />
+              Create Album
             </Button>
           </Link>
-          <Link to="/memories">
+          <Link to="/add/story">
             <Button size="lg" variant="outline" className="text-base px-8">
-              View Memory Book
+              <PenLine className="w-4 h-4 mr-2" />
+              Write a Story
             </Button>
           </Link>
         </div>
       </section>
 
-      {/* Features */}
       <section className="container mx-auto px-4 py-16 max-w-5xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {features.map((feature) => (
@@ -74,8 +70,8 @@ const Index = () => {
               key={feature.title}
               className="bg-card rounded-xl border border-border p-6 shadow-warm transition-all hover:shadow-lg"
             >
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <feature.icon className="w-5 h-5 text-primary" />
+              <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center mb-4">
+                <feature.icon className="w-5 h-5 text-foreground" />
               </div>
               <h3 className="font-display text-lg font-semibold text-foreground mb-2">
                 {feature.title}
@@ -88,7 +84,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="border-t border-border py-8 mt-8">
         <p className="text-center text-sm text-muted-foreground">
           Made with love for our family 💛

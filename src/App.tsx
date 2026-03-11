@@ -5,7 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import Memories from "./pages/Memories.tsx";
-import AddMemory from "./pages/AddMemory.tsx";
+import CreateAlbum from "./pages/CreateAlbum.tsx";
+import CreateStory from "./pages/CreateStory.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -19,7 +20,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/memories" element={<Memories />} />
-          <Route path="/add" element={<AddMemory />} />
+          <Route path="/add/album" element={<CreateAlbum />} />
+          <Route path="/add/story" element={<CreateStory />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

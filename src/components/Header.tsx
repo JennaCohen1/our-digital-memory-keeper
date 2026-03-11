@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { BookOpen, Plus, Home } from "lucide-react";
+import { BookOpen, ImagePlus, PenLine, Home } from "lucide-react";
 
 const Header = () => {
   const location = useLocation();
@@ -7,16 +7,17 @@ const Header = () => {
   const navItems = [
     { to: "/", label: "Home", icon: Home },
     { to: "/memories", label: "Memories", icon: BookOpen },
-    { to: "/add", label: "Add Memory", icon: Plus },
+    { to: "/add/album", label: "Album", icon: ImagePlus },
+    { to: "/add/story", label: "Story", icon: PenLine },
   ];
 
   return (
-    <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-50">
+    <header className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <BookOpen className="w-6 h-6 text-primary" />
-          <span className="font-display text-xl font-semibold text-foreground tracking-tight">
-            Our Memory Book
+          <BookOpen className="w-5 h-5 text-foreground" />
+          <span className="font-display text-lg font-semibold text-foreground tracking-tight">
+            Memory Book
           </span>
         </Link>
         <nav className="flex items-center gap-1">
@@ -24,10 +25,10 @@ const Header = () => {
             <Link
               key={to}
               to={to}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors ${
                 location.pathname === to
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                  ? "bg-foreground text-background font-medium"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <Icon className="w-4 h-4" />
