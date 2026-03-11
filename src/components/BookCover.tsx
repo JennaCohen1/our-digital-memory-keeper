@@ -40,7 +40,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
               ))}
             </div>
 
-            <p className="font-body text-[10px] font-normal tracking-[0.3em] uppercase text-foreground/40 mt-6">
+            <p className="font-body text-[10px] font-normal tracking-[0.3em] uppercase text-foreground mt-6">
               Our Family's Memories
             </p>
           </div>
