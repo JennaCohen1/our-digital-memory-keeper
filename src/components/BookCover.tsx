@@ -45,14 +45,16 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
               ))}
             </div>
 
-            <p className="font-display text-sm italic text-foreground mt-6">
-              8.7.1978
-            </p>
           </div>
 
-          {/* Bottom hint */}
-          <p className="absolute bottom-6 left-0 right-0 text-center text-[10px] tracking-[0.2em] uppercase text-muted-foreground/30 font-body">
-            Open
+          {/* Date at bottom center */}
+          <p className="absolute bottom-6 left-0 right-0 text-center font-display text-sm italic text-foreground">
+            8.7.1978
+          </p>
+
+          {/* Open hint at bottom right, like flipping a page corner */}
+          <p className="absolute bottom-3 right-4 text-[9px] tracking-[0.15em] uppercase text-muted-foreground/30 font-body">
+            Open →
           </p>
         </div>
       </div>
