@@ -107,7 +107,7 @@ const BookPreview = () => {
       case "cover":
         return (
           <div className="h-full flex flex-col items-center justify-center -mt-10">
-            <div className="w-[80%]" style={{ fontSize: 'clamp(3rem, 15vw, 6rem)', lineHeight: 0.85 }}>
+            <div className="w-[80%]" style={{ fontSize: 'clamp(3rem, 15vw, 6rem)', lineHeight: 1.1 }}>
               {["CHR", "IST", "IAN", "SON"].map((row, ri) => (
                 <div key={ri} className="flex justify-between">
                   {row.split("").map((letter, ci) => (
