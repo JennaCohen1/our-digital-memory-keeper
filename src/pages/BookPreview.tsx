@@ -100,16 +100,16 @@ const BookPreview = () => {
 
       case "quote":
         return (
-          <div className="h-full flex flex-col items-center justify-center p-8 text-center">
-            <p className="font-display text-sm italic text-muted-foreground leading-relaxed max-w-[220px]">
-              "If you can fill the unforgiving minute
+          <div className="h-full flex flex-col items-center justify-end p-8 pb-16 text-center bg-foreground">
+            <p className="font-body text-base font-bold text-background uppercase tracking-wide leading-snug max-w-[260px]">
+              "If you can fill the unforgiving minute...
               <br />
-              With sixty seconds' worth of distance run,
+              With sixty seconds' worth of distance run...
               <br />
-              Yours is the Earth and everything that's in it."
+              Yours is the Earth and everything that's in it..."
             </p>
-            <p className="font-body text-[9px] tracking-[0.2em] uppercase text-muted-foreground/60 mt-4">
-              — Rudyard Kipling
+            <p className="font-body text-xs font-bold text-background uppercase tracking-wide mt-5">
+              —Rudyard Kipling
             </p>
           </div>
         );
