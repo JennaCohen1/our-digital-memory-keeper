@@ -164,7 +164,7 @@
 
 .book-preview-container {
   position: relative;
-  width: min(380px, 75vw);
+  width: min(400px, 80vw);
   aspect-ratio: 3 / 4;
 }
 
