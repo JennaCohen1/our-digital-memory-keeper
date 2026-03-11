@@ -106,8 +106,8 @@ const BookPreview = () => {
     switch (page.type) {
       case "cover":
         return (
-          <div className="h-full flex flex-col items-center justify-end px-10 pb-16">
-            <div className="w-full" style={{ fontSize: 'clamp(4rem, 18vw, 8rem)', lineHeight: 1.1 }}>
+          <div className="h-full flex flex-col items-center justify-end pb-16">
+            <div className="w-[80%]" style={{ fontSize: 'clamp(3rem, 15vw, 6rem)', lineHeight: 1.1 }}>
               {["CHR", "IST", "IAN", "SON"].map((row, ri) => (
                 <div key={ri} className="flex justify-between">
                   {row.split("").map((letter, ci) => (
