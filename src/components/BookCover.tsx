@@ -24,14 +24,14 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
           </div>
         </div>
 
-        {/* Front cover — minimal dark */}
+        {/* Front cover — warm dark */}
         <div className="book-cover" onClick={handleOpen}>
           {/* Spine edge */}
-          <div className="absolute inset-y-0 left-0 w-4 bg-foreground/10" />
+          <div className="absolute inset-y-0 left-0 w-4 bg-background/5" />
 
           <div className="relative z-10 h-full flex flex-col items-center justify-center px-12 text-center">
             {/* Thin rule */}
-            <div className="w-12 h-px bg-background/20 mb-8" />
+            <div className="w-12 h-px bg-warm-gold/40 mb-8" />
 
             <h1 className="font-display text-4xl sm:text-5xl font-medium text-background tracking-tight leading-tight">
               Our
@@ -41,15 +41,15 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
               Book
             </h1>
 
-            <div className="w-8 h-px bg-background/20 my-8" />
+            <div className="w-8 h-px bg-warm-gold/40 my-8" />
 
-            <p className="font-body text-sm font-light tracking-[0.2em] uppercase text-background/50">
+            <p className="font-body text-sm font-light tracking-[0.2em] uppercase text-warm-gold/70">
               A Family Story
             </p>
           </div>
 
           {/* Bottom hint */}
-          <p className="absolute bottom-6 left-0 right-0 text-center text-xs tracking-[0.15em] uppercase text-background/30 font-body">
+          <p className="absolute bottom-6 left-0 right-0 text-center text-xs tracking-[0.15em] uppercase text-background/25 font-body">
             Open
           </p>
         </div>
