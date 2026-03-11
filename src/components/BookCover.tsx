@@ -37,7 +37,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
             <div className="w-10 h-px bg-warm-gold/30 my-8" />
 
             <p className="font-body text-[11px] font-normal tracking-[0.3em] uppercase text-warm-gold/60">
-              Christianson
+              Our Family's Memories
             </p>
           </div>
 
