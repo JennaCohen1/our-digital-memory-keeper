@@ -1,9 +1,21 @@
-export interface Memory {
+export interface Photo {
   id: string;
-  type: "photo" | "story";
+  imageData: string;
+  caption?: string;
+}
+
+export interface Album {
+  id: string;
   title: string;
-  content: string; // story text or photo caption
-  imageData?: string; // base64 for photos
-  date?: string; // when the memory happened
+  date?: string;
+  photos: Photo[];
+  createdAt: string;
+}
+
+export interface Story {
+  id: string;
+  title: string;
+  content: string;
+  date?: string;
   createdAt: string;
 }
