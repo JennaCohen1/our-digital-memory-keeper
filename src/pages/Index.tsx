@@ -22,9 +22,9 @@ const features = [
     description: "Record your voice telling the story behind each memory. (Coming soon)",
   },
   {
-    icon: BookOpen,
-    title: "Publish as a Book",
-    description: "Turn your collected memories into a beautiful printed book. (Coming soon)",
+    icon: Eye,
+    title: "Preview Draft",
+    description: "Flip through your collected memories as a beautiful book preview.",
   },
 ];
 
