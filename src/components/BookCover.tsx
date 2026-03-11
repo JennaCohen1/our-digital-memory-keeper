@@ -18,10 +18,10 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
         {/* Back page */}
         <div className="book-back-page">
           <div className="h-full flex flex-col items-center justify-center p-10 text-center">
-            <p className="font-display text-sm italic text-muted-foreground leading-relaxed max-w-[260px]">
-              "If you can fill the unforgiving minute<br />
-              With sixty seconds' worth of distance run,<br />
-              Yours is the Earth and everything that's in it."
+            <p className="font-body text-sm font-light text-muted-foreground leading-relaxed max-w-[280px] tracking-wide">
+              "If you can fill the unforgiving minute...<br />
+              With sixty seconds' worth of distance run...<br />
+              Yours is the Earth and everything that's in it..."
             </p>
             <p className="font-body text-[9px] tracking-[0.2em] uppercase text-muted-foreground/60 mt-4">
               — Rudyard Kipling
