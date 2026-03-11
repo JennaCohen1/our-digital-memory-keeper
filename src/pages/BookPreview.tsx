@@ -128,7 +128,39 @@ const BookPreview = () => {
           </div>
         );
 
-      case "album":
+      case "contents":
+        return (
+          <div className="h-full flex flex-col p-8 overflow-auto">
+            <h2 className="font-display text-2xl font-bold text-foreground mb-6">
+              Contents
+            </h2>
+            <div className="space-y-1">
+              {Object.entries(tocData)
+                .sort(([a], [b]) => (a === "Undated" ? 1 : b === "Undated" ? -1 : a.localeCompare(b)))
+                .map(([year, titles]) => (
+                  <div key={year}>
+                    <button
+                      className="w-full flex items-center justify-between py-2 border-b border-border text-left group"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setExpandedYears((prev) => ({ ...prev, [year]: !prev[year] }));
+                      }}
+                    >
+                      <span className="font-body text-base font-semibold text-foreground">{year}</span>
+                      <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${expandedYears[year] ? "rotate-180" : ""}`} />
+                    </button>
+                    {expandedYears[year] && (
+                      <div className="pl-4 py-1 space-y-1">
+                        {titles.map((title, i) => (
+                          <p key={i} className="font-body text-sm text-muted-foreground py-0.5">{title}</p>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+            </div>
+          </div>
+        );
         return (
           <div className="h-full flex flex-col p-6 overflow-hidden">
             <h2 className="font-display text-xl font-semibold text-foreground mb-1">
