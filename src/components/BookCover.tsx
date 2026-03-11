@@ -9,7 +9,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
 
   const handleOpen = () => {
     setIsOpening(true);
-    setTimeout(() => onOpen(), 3000);
+    setTimeout(() => onOpen(), 5000);
   };
 
   return (
