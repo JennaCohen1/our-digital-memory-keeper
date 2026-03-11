@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { BookOpen, ImagePlus, PenLine, Mic, Eye } from "lucide-react";
+import { ImagePlus, PenLine, Mic, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import BookCover from "@/components/BookCover";
@@ -22,9 +22,9 @@ const features = [
     description: "Record your voice telling the story behind each memory. (Coming soon)",
   },
   {
-    icon: BookOpen,
-    title: "Publish as a Book",
-    description: "Turn your collected memories into a beautiful printed book. (Coming soon)",
+    icon: Eye,
+    title: "Preview Draft",
+    description: "Flip through your collected memories as a beautiful book preview.",
   },
 ];
 
