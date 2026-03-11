@@ -19,10 +19,12 @@ function buildPages(albums: Album[], stories: Story[]): BookPage[] {
     { type: "quote" },
   ];
 
-  // Interleave albums and stories by date
-  const items: (Album | Story)[] = [...albums, ...stories].sort(
-    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-  );
+  // Sort by memory date (chronological), fall back to createdAt
+  const items: (Album | Story)[] = [...albums, ...stories].sort((a, b) => {
+    const dateA = a.date ? new Date(a.date).getTime() : new Date(a.createdAt).getTime();
+    const dateB = b.date ? new Date(b.date).getTime() : new Date(b.createdAt).getTime();
+    return dateA - dateB;
+  });
 
   for (const item of items) {
     if ("photos" in item) {
