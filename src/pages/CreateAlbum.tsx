@@ -13,6 +13,7 @@ const CreateAlbum = () => {
   const { addAlbum } = useAlbums();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const [title, setTitle] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [photos, setPhotos] = useState<Photo[]>([]);
