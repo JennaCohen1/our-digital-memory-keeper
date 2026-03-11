@@ -31,7 +31,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
 
           <div className="relative z-10 h-full flex flex-col items-start justify-end px-10 pb-14 text-left">
             <h1 className="font-display text-7xl sm:text-8xl font-bold text-foreground tracking-[0.05em] leading-[0.85] uppercase">
-              Chris<br />tian<br />son
+              Chr<br />ist<br />ian<br />son
             </h1>
 
             <p className="font-body text-[10px] font-normal tracking-[0.3em] uppercase text-foreground/40 mt-6">
