@@ -13,7 +13,7 @@ interface BookPage {
   date?: string;
 }
 
-function buildPages(albums: Album[], stories: Story[]): BookPage[] {
+function buildPages(albums: Album[], stories: Story[]): { pages: BookPage[]; tocData: Record<string, string[]> } {
   const pages: BookPage[] = [
     { type: "cover" },
     { type: "quote" },
