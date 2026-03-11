@@ -1,19 +1,19 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAlbums, useStories } from "@/hooks/useMemories";
 import { Album, Story } from "@/lib/types";
 
 interface BookPage {
-  type: "cover" | "quote" | "album" | "story" | "end";
+  type: "cover" | "quote" | "contents" | "album" | "story" | "end";
   title?: string;
   content?: string;
   photos?: { imageData: string; caption?: string }[];
   date?: string;
 }
 
-function buildPages(albums: Album[], stories: Story[]): BookPage[] {
+function buildPages(albums: Album[], stories: Story[]): { pages: BookPage[]; tocData: Record<string, string[]> } {
   const pages: BookPage[] = [
     { type: "cover" },
     { type: "quote" },
@@ -25,6 +25,19 @@ function buildPages(albums: Album[], stories: Story[]): BookPage[] {
     const dateB = b.date ? new Date(b.date).getTime() : new Date(b.createdAt).getTime();
     return dateA - dateB;
   });
+
+  // Build table of contents grouped by year
+  const tocData: Record<string, string[]> = {};
+  for (const item of items) {
+    const dateStr = item.date || "";
+    const yearMatch = dateStr.match(/(\d{4})/);
+    const year = yearMatch ? yearMatch[1] : "Undated";
+    if (!tocData[year]) tocData[year] = [];
+    tocData[year].push(item.title);
+  }
+
+  // Add contents page after quote
+  pages.push({ type: "contents" });
 
   for (const item of items) {
     if ("photos" in item) {
@@ -45,14 +58,15 @@ function buildPages(albums: Album[], stories: Story[]): BookPage[] {
   }
 
   pages.push({ type: "end" });
-  return pages;
+  return { pages, tocData };
 }
 
 const BookPreview = () => {
   const navigate = useNavigate();
   const { albums } = useAlbums();
   const { stories } = useStories();
-  const pages = buildPages(albums, stories);
+  const { pages, tocData } = buildPages(albums, stories);
+  const [expandedYears, setExpandedYears] = useState<Record<string, boolean>>({});
 
   const [currentPage, setCurrentPage] = useState(0);
   const [isFlipping, setIsFlipping] = useState(false);
@@ -114,7 +128,39 @@ const BookPreview = () => {
           </div>
         );
 
-      case "album":
+      case "contents":
+        return (
+          <div className="h-full flex flex-col p-8 overflow-auto">
+            <h2 className="font-display text-2xl font-bold text-foreground mb-6">
+              Contents
+            </h2>
+            <div className="space-y-1">
+              {Object.entries(tocData)
+                .sort(([a], [b]) => (a === "Undated" ? 1 : b === "Undated" ? -1 : a.localeCompare(b)))
+                .map(([year, titles]) => (
+                  <div key={year}>
+                    <button
+                      className="w-full flex items-center justify-between py-2 border-b border-border text-left group"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setExpandedYears((prev) => ({ ...prev, [year]: !prev[year] }));
+                      }}
+                    >
+                      <span className="font-body text-base font-semibold text-foreground">{year}</span>
+                      <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${expandedYears[year] ? "rotate-180" : ""}`} />
+                    </button>
+                    {expandedYears[year] && (
+                      <div className="pl-4 py-1 space-y-1">
+                        {titles.map((title, i) => (
+                          <p key={i} className="font-body text-sm text-muted-foreground py-0.5">{title}</p>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+            </div>
+          </div>
+        );
         return (
           <div className="h-full flex flex-col p-6 overflow-hidden">
             <h2 className="font-display text-xl font-semibold text-foreground mb-1">
