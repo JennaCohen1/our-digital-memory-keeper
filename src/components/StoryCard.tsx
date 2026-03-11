@@ -1,4 +1,5 @@
 import { Story } from "@/lib/types";
+import { formatMemoryDate } from "@/lib/dateUtils";
 import { Calendar, Trash2 } from "lucide-react";
 
 interface StoryCardProps {
