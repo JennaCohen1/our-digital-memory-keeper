@@ -35,7 +35,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
           <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-foreground/[0.04] to-transparent" />
 
           <div className="relative z-10 h-full flex flex-col items-center justify-center px-10 -mt-16">
-            <div className="w-full" style={{ fontSize: 'clamp(4rem, 18vw, 8rem)', lineHeight: 0.85 }}>
+            <div className="w-full" style={{ fontSize: 'clamp(4rem, 18vw, 8rem)', lineHeight: 1.1 }}>
               {["CHR", "IST", "IAN", "SON"].map((row, ri) => (
                 <div key={ri} className="flex justify-between">
                   {row.split("").map((letter, ci) => (
