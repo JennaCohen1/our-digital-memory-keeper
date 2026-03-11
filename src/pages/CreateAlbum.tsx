@@ -4,8 +4,8 @@ import { useAlbums } from "@/hooks/useMemories";
 import { Upload, X, ImagePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import Header from "@/components/Header";
+import MemoryDatePicker from "@/components/MemoryDatePicker";
 import { Photo } from "@/lib/types";
 
 const CreateAlbum = () => {
@@ -14,7 +14,8 @@ const CreateAlbum = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -55,7 +56,7 @@ const CreateAlbum = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || photos.length === 0) return;
+    const date = year ? (month && month !== "none" ? `${year}-${month}` : year) : undefined;
     addAlbum({ title, date, photos });
     navigate("/memories");
   };
@@ -83,8 +84,13 @@ const CreateAlbum = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Date</label>
-              <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+              <label className="block text-sm font-medium text-foreground mb-2">When</label>
+              <MemoryDatePicker
+                month={month}
+                year={year}
+                onMonthChange={setMonth}
+                onYearChange={setYear}
+              />
             </div>
           </div>
 

@@ -1,4 +1,5 @@
 import { Story } from "@/lib/types";
+import { formatMemoryDate } from "@/lib/dateUtils";
 import { Calendar, Trash2 } from "lucide-react";
 
 interface StoryCardProps {
@@ -23,10 +24,10 @@ const StoryCard = ({ story, onDelete }: StoryCardProps) => {
           </button>
         )}
       </div>
-      {story.date && (
+      {formatMemoryDate(story.date) && (
         <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
           <Calendar className="w-3.5 h-3.5" />
-          <span>{new Date(story.date).toLocaleDateString("en-US", { year: "numeric", month: "long" })}</span>
+          <span>{formatMemoryDate(story.date)}</span>
         </div>
       )}
       <p className="mt-3 text-sm text-secondary-foreground leading-relaxed line-clamp-5">

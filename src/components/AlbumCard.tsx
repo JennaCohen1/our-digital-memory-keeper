@@ -1,4 +1,5 @@
 import { Album } from "@/lib/types";
+import { formatMemoryDate } from "@/lib/dateUtils";
 import { Calendar, Trash2, Image } from "lucide-react";
 
 interface AlbumCardProps {
@@ -42,10 +43,10 @@ const AlbumCard = ({ album, onDelete }: AlbumCardProps) => {
             </button>
           )}
         </div>
-        {album.date && (
+        {formatMemoryDate(album.date) && (
           <div className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
             <Calendar className="w-3.5 h-3.5" />
-            <span>{new Date(album.date).toLocaleDateString("en-US", { year: "numeric", month: "long" })}</span>
+            <span>{formatMemoryDate(album.date)}</span>
           </div>
         )}
         <p className="mt-2 text-sm text-muted-foreground">

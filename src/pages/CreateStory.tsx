@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Header from "@/components/Header";
+import MemoryDatePicker from "@/components/MemoryDatePicker";
 
 const CreateStory = () => {
   const navigate = useNavigate();
@@ -12,13 +13,14 @@ const CreateStory = () => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [date, setDate] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !content.trim()) return;
+    const date = year ? (month && month !== "none" ? `${year}-${month}` : year) : undefined;
     addStory({ title, content, date });
-    navigate("/memories");
   };
 
   return (
@@ -45,7 +47,12 @@ const CreateStory = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">When</label>
-              <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+              <MemoryDatePicker
+                month={month}
+                year={year}
+                onMonthChange={setMonth}
+                onYearChange={setYear}
+              />
             </div>
           </div>
 
