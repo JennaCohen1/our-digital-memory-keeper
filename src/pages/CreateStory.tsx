@@ -18,8 +18,8 @@ const CreateStory = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !content.trim()) return;
+    const date = year ? (month && month !== "none" ? `${year}-${month}` : year) : undefined;
     addStory({ title, content, date });
-    navigate("/memories");
   };
 
   return (
