@@ -24,25 +24,23 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
           </div>
         </div>
 
-        {/* Front cover — cream with gold text */}
+        {/* Front cover — white with bold black text, Tom Ford style */}
         <div className="book-cover-cream" onClick={handleOpen}>
           {/* Subtle spine shadow */}
           <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-foreground/[0.04] to-transparent" />
 
-          <div className="relative z-10 h-full flex flex-col items-center justify-center px-12 text-center">
-            <h1 className="font-display text-5xl sm:text-6xl font-medium text-warm-gold tracking-[0.04em] leading-[1.15] uppercase">
-              Christian<br />son
+          <div className="relative z-10 h-full flex flex-col items-start justify-end px-10 pb-14 text-left">
+            <h1 className="font-display text-7xl sm:text-8xl font-bold text-foreground tracking-[-0.02em] leading-[0.9] uppercase">
+              Christ<br />ianson
             </h1>
 
-            <div className="w-10 h-px bg-warm-gold/30 my-8" />
-
-            <p className="font-body text-[11px] font-normal tracking-[0.3em] uppercase text-warm-gold/60">
+            <p className="font-body text-[10px] font-normal tracking-[0.3em] uppercase text-foreground/40 mt-6">
               Our Family's Memories
             </p>
           </div>
 
           {/* Bottom hint */}
-          <p className="absolute bottom-6 left-0 right-0 text-center text-[10px] tracking-[0.2em] uppercase text-muted-foreground/40 font-body">
+          <p className="absolute bottom-6 left-0 right-0 text-center text-[10px] tracking-[0.2em] uppercase text-muted-foreground/30 font-body">
             Open
           </p>
         </div>
