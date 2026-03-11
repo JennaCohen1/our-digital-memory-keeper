@@ -165,8 +165,8 @@ const BookPreview = () => {
 
       case "end":
         return (
-          <div className="h-full flex flex-col items-center justify-center p-8 text-center">
-            <p className="font-display text-lg italic text-muted-foreground">
+          <div className="h-full flex flex-col items-center justify-end p-8 pb-16 text-center bg-foreground">
+            <p className="font-body text-base font-bold text-background uppercase tracking-wide">
               The story continues…
             </p>
           </div>
