@@ -26,6 +26,19 @@ function buildPages(albums: Album[], stories: Story[]): { pages: BookPage[]; toc
     return dateA - dateB;
   });
 
+  // Build table of contents grouped by year
+  const tocData: Record<string, string[]> = {};
+  for (const item of items) {
+    const dateStr = item.date || "";
+    const yearMatch = dateStr.match(/(\d{4})/);
+    const year = yearMatch ? yearMatch[1] : "Undated";
+    if (!tocData[year]) tocData[year] = [];
+    tocData[year].push(item.title);
+  }
+
+  // Add contents page after quote
+  pages.push({ type: "contents" });
+
   for (const item of items) {
     if ("photos" in item) {
       pages.push({
@@ -45,7 +58,7 @@ function buildPages(albums: Album[], stories: Story[]): { pages: BookPage[]; toc
   }
 
   pages.push({ type: "end" });
-  return pages;
+  return { pages, tocData };
 }
 
 const BookPreview = () => {
