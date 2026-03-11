@@ -48,7 +48,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
           </div>
 
           {/* Date at bottom center */}
-          <p className="absolute bottom-6 left-0 right-0 text-center font-display text-sm italic text-foreground">
+          <p className="absolute bottom-6 left-0 right-0 text-center font-display text-xs italic text-foreground">
             8.7.1978
           </p>
 
