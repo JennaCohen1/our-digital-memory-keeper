@@ -32,7 +32,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
           <div className="relative z-10 h-full flex flex-col items-center justify-center px-10">
             <div className="grid grid-cols-3 gap-0 w-full" style={{ fontSize: 'clamp(4rem, 18vw, 8rem)', lineHeight: 0.85 }}>
               {"CHRISTIANSON".split("").map((letter, i) => (
-                <span key={i} className="font-display font-bold text-foreground uppercase text-center">{letter}</span>
+                <span key={i} className={`font-display font-bold text-foreground uppercase ${i % 3 === 0 ? 'text-left' : i % 3 === 2 ? 'text-right' : 'text-center'}`}>{letter}</span>
               ))}
             </div>
 
