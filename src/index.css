@@ -144,8 +144,8 @@
   border-radius: 0 4px 4px 0;
   background: hsl(0 0% 96%);
   box-shadow:
-    2px 4px 16px -4px hsl(30 15% 40% / 0.12),
-    inset 0 0 0 1px hsl(30 10% 85%);
+    2px 4px 16px -4px hsl(0 0% 30% / 0.12),
+    inset 0 0 0 1px hsl(0 0% 85%);
 }
 
 .book-cover-cream:hover {
