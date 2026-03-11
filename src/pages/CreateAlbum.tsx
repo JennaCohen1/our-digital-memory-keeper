@@ -4,8 +4,8 @@ import { useAlbums } from "@/hooks/useMemories";
 import { Upload, X, ImagePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import Header from "@/components/Header";
+import MemoryDatePicker from "@/components/MemoryDatePicker";
 import { Photo } from "@/lib/types";
 
 const CreateAlbum = () => {
