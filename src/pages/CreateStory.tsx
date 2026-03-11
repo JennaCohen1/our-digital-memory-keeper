@@ -12,8 +12,8 @@ const CreateStory = () => {
   const { addStory } = useStories();
 
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [date, setDate] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
