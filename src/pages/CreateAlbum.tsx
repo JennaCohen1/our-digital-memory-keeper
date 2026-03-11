@@ -83,8 +83,13 @@ const CreateAlbum = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Date</label>
-              <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+              <label className="block text-sm font-medium text-foreground mb-2">When</label>
+              <MemoryDatePicker
+                month={month}
+                year={year}
+                onMonthChange={setMonth}
+                onYearChange={setYear}
+              />
             </div>
           </div>
 
