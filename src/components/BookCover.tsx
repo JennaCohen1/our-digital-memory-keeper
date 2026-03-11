@@ -30,12 +30,11 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
           <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-foreground/[0.04] to-transparent" />
 
           <div className="relative z-10 h-full flex flex-col items-center justify-center px-10">
-            <h1 className="font-display text-7xl sm:text-8xl font-bold text-foreground leading-[0.85] uppercase w-full">
-              <span className="flex justify-between">{"CHR".split("").map((l, i) => <span key={i}>{l}</span>)}</span>
-              <span className="flex justify-between">{"IST".split("").map((l, i) => <span key={i}>{l}</span>)}</span>
-              <span className="flex justify-between">{"IAN".split("").map((l, i) => <span key={i}>{l}</span>)}</span>
-              <span className="flex justify-between">{"SON".split("").map((l, i) => <span key={i}>{l}</span>)}</span>
-            </h1>
+            <div className="grid grid-cols-3 gap-0 w-full" style={{ fontSize: 'clamp(4rem, 18vw, 8rem)', lineHeight: 0.85 }}>
+              {"CHRISTIANSON".split("").map((letter, i) => (
+                <span key={i} className="font-display font-bold text-foreground uppercase text-center">{letter}</span>
+              ))}
+            </div>
 
             <p className="font-body text-[10px] font-normal tracking-[0.3em] uppercase text-foreground/40 mt-6">
               Our Family's Memories
