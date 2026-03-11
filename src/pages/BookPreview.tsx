@@ -108,7 +108,7 @@ const BookPreview = () => {
               <br />
               Yours is the earth and everything that's in it..."
             </p>
-            <p className="font-body text-xs font-bold text-background uppercase tracking-wide mt-5 text-right">
+            <p className="font-body text-xs font-bold text-background tracking-wide mt-5 text-right">
               —Rudyard Kipling
             </p>
           </div>

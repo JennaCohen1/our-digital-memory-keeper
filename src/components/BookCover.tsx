@@ -23,7 +23,7 @@ const BookCover = ({ onOpen }: BookCoverProps) => {
               With sixty seconds' worth of distance run,<br />
               Yours is the earth and everything that's in it..."
             </p>
-            <p className="font-body text-sm font-bold text-background uppercase tracking-wide mt-6 text-right">
+            <p className="font-body text-sm font-bold text-background tracking-wide mt-6 text-right">
               —Rudyard Kipling
             </p>
           </div>
