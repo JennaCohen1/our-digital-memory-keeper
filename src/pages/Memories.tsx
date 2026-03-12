@@ -1,16 +1,35 @@
+import { useState } from "react";
 import { useAlbums, useStories } from "@/hooks/useMemories";
 import AlbumCard from "@/components/AlbumCard";
 import StoryCard from "@/components/StoryCard";
 import Header from "@/components/Header";
-import { Link } from "react-router-dom";
-import { Plus, BookOpen, ImagePlus, PenLine } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { BookOpen } from "lucide-react";
 
 const Memories = () => {
   const { albums, deleteAlbum } = useAlbums();
   const { stories, deleteStory } = useStories();
 
+  const [filter, setFilter] = useState<"all" | "albums" | "stories">("all");
+  const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
+
   const isEmpty = albums.length === 0 && stories.length === 0;
+
+  let galleryItems = [
+    ...albums.map((album) => ({ type: "album" as const, item: album })),
+    ...stories.map((story) => ({ type: "story" as const, item: story })),
+  ];
+
+  if (filter === "albums") {
+    galleryItems = galleryItems.filter((entry) => entry.type === "album");
+  } else if (filter === "stories") {
+    galleryItems = galleryItems.filter((entry) => entry.type === "story");
+  }
+
+  galleryItems = galleryItems.sort((a, b) => {
+    const aDate = new Date(a.item.createdAt).getTime();
+    const bDate = new Date(b.item.createdAt).getTime();
+    return sortOrder === "newest" ? bDate - aDate : aDate - bDate;
+  });
 
   return (
     <div className="min-h-screen bg-background">
@@ -20,20 +39,59 @@ const Memories = () => {
           <h1 className="font-display text-3xl font-bold text-foreground">
             Our Memories
           </h1>
-          <div className="flex gap-2">
-            <Link to="/add/album">
-              <Button variant="outline" size="sm">
-                <ImagePlus className="w-4 h-4 mr-2" />
-                Album
-              </Button>
-            </Link>
-            <Link to="/add/story">
-              <Button variant="outline" size="sm">
-                <PenLine className="w-4 h-4 mr-2" />
-                Story
-              </Button>
-            </Link>
-          </div>
+          {!isEmpty && (
+            <div className="flex items-center gap-3 text-sm">
+              <div className="flex gap-1 rounded-full border border-border bg-muted p-1">
+                <button
+                  type="button"
+                  onClick={() => setFilter("all")}
+                  className={`px-3 py-1 rounded-full ${
+                    filter === "all" ? "bg-background shadow-sm font-medium" : "text-muted-foreground"
+                  }`}
+                >
+                  All
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFilter("albums")}
+                  className={`px-3 py-1 rounded-full ${
+                    filter === "albums" ? "bg-background shadow-sm font-medium" : "text-muted-foreground"
+                  }`}
+                >
+                  Albums
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFilter("stories")}
+                  className={`px-3 py-1 rounded-full ${
+                    filter === "stories" ? "bg-background shadow-sm font-medium" : "text-muted-foreground"
+                  }`}
+                >
+                  Stories
+                </button>
+              </div>
+              <div className="flex gap-1 rounded-full border border-border bg-muted p-1">
+                <button
+                  type="button"
+                  onClick={() => setSortOrder("newest")}
+                  className={`px-3 py-1 rounded-full ${
+                    sortOrder === "newest" ? "bg-background shadow-sm font-medium" : "text-muted-foreground"
+                  }`}
+                >
+                  Newest
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSortOrder("oldest")}
+                  className={`px-3 py-1 rounded-full ${
+                    sortOrder === "oldest" ? "bg-background shadow-sm font-medium" : "text-muted-foreground"
+                  }`}
+                >
+                  Oldest
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {isEmpty ? (
@@ -43,54 +101,23 @@ const Memories = () => {
               No memories yet
             </h2>
             <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
-              Start by uploading a photo album or writing a story.
+              Start by uploading a photo album or writing a story from the home screen.
             </p>
-            <div className="flex gap-3 justify-center">
-              <Link to="/add/album">
-                <Button>
-                  <ImagePlus className="w-4 h-4 mr-2" />
-                  Create Album
-                </Button>
-              </Link>
-              <Link to="/add/story">
-                <Button variant="outline">
-                  <PenLine className="w-4 h-4 mr-2" />
-                  Write Story
-                </Button>
-              </Link>
-            </div>
           </div>
         ) : (
-          <div className="space-y-12">
-            {/* Albums */}
-            {albums.length > 0 && (
-              <section>
-                <h2 className="font-display text-xl font-semibold text-foreground mb-5 flex items-center gap-2">
-                  <ImagePlus className="w-5 h-5 text-muted-foreground" />
-                  Photo Albums
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {albums.map((album) => (
-                    <AlbumCard key={album.id} album={album} onDelete={deleteAlbum} />
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {/* Stories */}
-            {stories.length > 0 && (
-              <section>
-                <h2 className="font-display text-xl font-semibold text-foreground mb-5 flex items-center gap-2">
-                  <PenLine className="w-5 h-5 text-muted-foreground" />
-                  Stories
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {stories.map((story) => (
-                    <StoryCard key={story.id} story={story} onDelete={deleteStory} />
-                  ))}
-                </div>
-              </section>
-            )}
+          <div>
+            <h2 className="font-display text-xl font-semibold text-foreground mb-5 flex items-center gap-2">
+              All memories
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryItems.map((entry) =>
+                entry.type === "album" ? (
+                  <AlbumCard key={`album-${entry.item.id}`} album={entry.item} onDelete={deleteAlbum} />
+                ) : (
+                  <StoryCard key={`story-${entry.item.id}`} story={entry.item} onDelete={deleteStory} />
+                )
+              )}
+            </div>
           </div>
         )}
       </main>

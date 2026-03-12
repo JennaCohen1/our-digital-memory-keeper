@@ -1,5 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
-import { BookOpen, ImagePlus, PenLine, Home, LogIn, LogOut } from "lucide-react";
+import {
+  BookOpen,
+  ImagePlus,
+  PenLine,
+  Home,
+  Eye,
+  LogIn,
+  LogOut,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -19,6 +27,7 @@ const Header = () => {
     { to: "/memories", label: "Memories", icon: BookOpen },
     { to: "/add/album", label: "Album", icon: ImagePlus },
     { to: "/add/story", label: "Story", icon: PenLine },
+    { to: "/preview", label: "Preview", icon: Eye },
   ];
 
   return (
