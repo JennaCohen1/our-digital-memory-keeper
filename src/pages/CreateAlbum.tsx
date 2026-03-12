@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAlbums } from "@/hooks/useMemories";
+import { useSpace } from "@/contexts/SpaceContext";
+import { useAlbums } from "@/hooks/useMemoriesSupabase";
 import { Upload, X, ImagePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,7 +11,8 @@ import { Photo } from "@/lib/types";
 
 const CreateAlbum = () => {
   const navigate = useNavigate();
-  const { addAlbum } = useAlbums();
+  const { currentSpaceId } = useSpace();
+  const { addAlbum } = useAlbums(currentSpaceId);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [title, setTitle] = useState("");
@@ -54,10 +56,11 @@ const CreateAlbum = () => {
     setPhotos((prev) => prev.map((p) => (p.id === id ? { ...p, caption } : p)));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const date = year ? (month && month !== "none" ? `${year}-${month}` : year) : undefined;
-    addAlbum({ title, date, photos });
+    if (!year) return;
+    const eventDate = month && month !== "none" ? `${year}-${month}-01` : `${year}-01-01`;
+    await addAlbum({ title, date: eventDate, photos });
     navigate("/memories");
   };
 
@@ -169,7 +172,7 @@ const CreateAlbum = () => {
           )}
 
           <div className="flex gap-3 pt-4">
-            <Button type="submit" className="flex-1" disabled={!title.trim() || photos.length === 0}>
+            <Button type="submit" className="flex-1" disabled={!title.trim() || photos.length === 0 || !year}>
               Save Album
             </Button>
             <Button type="button" variant="outline" onClick={() => navigate(-1)}>

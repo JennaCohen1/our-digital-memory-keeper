@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ImagePlus, PenLine, Mic, Eye } from "lucide-react";
+import { ImagePlus, PenLine, Mic, Eye, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import BookCover from "@/components/BookCover";
@@ -69,10 +69,16 @@ const Index = () => {
         <h1 className="font-display text-5xl sm:text-6xl font-bold text-foreground leading-tight mb-6">
           Every family has a story worth keeping
         </h1>
-        <p className="text-lg text-muted-foreground leading-relaxed mb-10 max-w-xl mx-auto">
+        <p className="text-lg text-muted-foreground leading-relaxed mb-6 max-w-xl mx-auto">
           Collect photos, write stories, and preserve your family's most
           precious memories — all in one beautiful place.
         </p>
+        <Link to="/memories">
+          <Button variant="outline" size="lg" className="gap-2">
+            <BookOpen className="w-4 h-4" />
+            Go to Memories gallery
+          </Button>
+        </Link>
       </section>
 
       <section className="container mx-auto px-4 py-16 max-w-5xl">

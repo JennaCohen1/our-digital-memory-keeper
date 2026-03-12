@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { useAlbums, useStories } from "@/hooks/useMemories";
+import { useSpace } from "@/contexts/SpaceContext";
+import { useAlbums, useStories } from "@/hooks/useMemoriesSupabase";
 import AlbumCard from "@/components/AlbumCard";
 import StoryCard from "@/components/StoryCard";
 import Header from "@/components/Header";
 import { BookOpen } from "lucide-react";
 
 const Memories = () => {
-  const { albums, deleteAlbum } = useAlbums();
-  const { stories, deleteStory } = useStories();
+  const { currentSpaceId } = useSpace();
+  const { albums, deleteAlbum } = useAlbums(currentSpaceId);
+  const { stories, deleteStory } = useStories(currentSpaceId);
 
   const [filter, setFilter] = useState<"all" | "albums" | "stories">("all");
   const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
@@ -112,9 +114,9 @@ const Memories = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {galleryItems.map((entry) =>
                 entry.type === "album" ? (
-                  <AlbumCard key={`album-${entry.item.id}`} album={entry.item} onDelete={deleteAlbum} />
+                  <AlbumCard key={`album-${entry.item.id}`} album={entry.item} onDelete={(id) => deleteAlbum(id)} />
                 ) : (
-                  <StoryCard key={`story-${entry.item.id}`} story={entry.item} onDelete={deleteStory} />
+                  <StoryCard key={`story-${entry.item.id}`} story={entry.item} onDelete={(id) => deleteStory(id)} />
                 )
               )}
             </div>

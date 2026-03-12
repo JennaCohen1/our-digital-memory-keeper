@@ -5,11 +5,19 @@ import { Calendar, Trash2 } from "lucide-react";
 interface StoryCardProps {
   story: Story;
   onDelete?: (id: string) => void;
+  spaceName?: string;
 }
 
-const StoryCard = ({ story, onDelete }: StoryCardProps) => {
+const StoryCard = ({ story, onDelete, spaceName }: StoryCardProps) => {
   return (
-    <article className="group bg-card rounded-xl border border-border shadow-warm p-6 transition-all hover:shadow-lg hover:-translate-y-0.5">
+    <article className="group relative bg-card rounded-xl border border-border shadow-warm p-6 transition-all hover:shadow-lg hover:-translate-y-0.5">
+      {spaceName && (
+        <div className="mb-2">
+          <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary/90 text-primary-foreground">
+            {spaceName}
+          </span>
+        </div>
+      )}
       <div className="flex items-start justify-between gap-2">
         <h3 className="font-display text-lg font-semibold text-foreground leading-snug">
           {story.title}

@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   BookOpen,
   ImagePlus,
@@ -7,9 +7,13 @@ import {
   Eye,
   LogIn,
   LogOut,
+  ChevronDown,
+  Library,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
+import { useSpace } from "@/contexts/SpaceContext";
+import { useSpaces } from "@/hooks/useSpaces";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +24,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, isSignedIn, signIn, signOut } = useAuth();
+  const { currentSpaceId, setCurrentSpaceId } = useSpace();
+  const { spaces } = useSpaces();
+
+  const currentSpace = spaces.find((s) => s.id === currentSpaceId);
 
   const navItems = [
     { to: "/", label: "Home", icon: Home },
@@ -54,6 +63,37 @@ const Header = () => {
               <span className="hidden sm:inline">{label}</span>
             </Link>
           ))}
+          {currentSpaceId && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2 max-w-[180px]">
+                  <BookOpen className="w-4 h-4 shrink-0" />
+                  <span className="truncate">{currentSpace?.name ?? "Book"}</span>
+                  <ChevronDown className="w-4 h-4 shrink-0" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                {spaces.map((space) => (
+                  <DropdownMenuItem
+                    key={space.id}
+                    className="cursor-pointer"
+                    onClick={() => {
+                      setCurrentSpaceId(space.id);
+                      if (location.pathname === "/books") navigate("/");
+                    }}
+                  >
+                    {space.name}
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onClick={() => navigate("/books")}
+                >
+                  All Memory Books
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
           {isSignedIn && user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -70,16 +110,22 @@ const Header = () => {
                 <div className="px-2 py-1.5 text-sm text-muted-foreground truncate">
                   {user.email}
                 </div>
-                <DropdownMenuItem onClick={signOut} className="cursor-pointer">
+                <Link to="/my-memories">
+                  <DropdownMenuItem className="cursor-pointer">
+                    <Library className="w-4 h-4 mr-2" />
+                    My Memories
+                  </DropdownMenuItem>
+                </Link>
+                <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer">
                   <LogOut className="w-4 h-4 mr-2" />
                   Sign out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="outline" size="sm" onClick={signIn} className="gap-2">
+            <Button variant="outline" size="sm" onClick={() => signIn()} className="gap-2">
               <LogIn className="w-4 h-4" />
-              <span className="hidden sm:inline">Sign in with Google</span>
+              <span className="hidden sm:inline">Sign in</span>
             </Button>
           )}
         </nav>

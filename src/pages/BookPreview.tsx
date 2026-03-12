@@ -2,7 +2,8 @@ import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight, ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAlbums, useStories } from "@/hooks/useMemories";
+import { useSpace } from "@/contexts/SpaceContext";
+import { useAlbums, useStories } from "@/hooks/useMemoriesSupabase";
 import { Album, Story } from "@/lib/types";
 
 interface BookPage {
@@ -63,8 +64,9 @@ function buildPages(albums: Album[], stories: Story[]): { pages: BookPage[]; toc
 
 const BookPreview = () => {
   const navigate = useNavigate();
-  const { albums } = useAlbums();
-  const { stories } = useStories();
+  const { currentSpaceId } = useSpace();
+  const { albums } = useAlbums(currentSpaceId);
+  const { stories } = useStories(currentSpaceId);
   const { pages, tocData } = buildPages(albums, stories);
   const [expandedYears, setExpandedYears] = useState<Record<string, boolean>>({});
   const [dragState, setDragState] = useState<{ year: string; index: number } | null>(null);

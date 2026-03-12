@@ -1,5 +1,6 @@
 import { type ReactNode } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { SpaceProvider } from "@/contexts/SpaceContext";
 import SignIn from "@/pages/SignIn";
 
 export default function AuthGate({ children }: { children: ReactNode }) {
@@ -9,5 +10,5 @@ export default function AuthGate({ children }: { children: ReactNode }) {
     return <SignIn />;
   }
 
-  return <>{children}</>;
+  return <SpaceProvider>{children}</SpaceProvider>;
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useStories } from "@/hooks/useMemories";
+import { useSpace } from "@/contexts/SpaceContext";
+import { useStories } from "@/hooks/useMemoriesSupabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,11 +17,12 @@ const CreateStory = () => {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || !content.trim()) return;
-    const date = year ? (month && month !== "none" ? `${year}-${month}` : year) : undefined;
-    addStory({ title, content, date });
+    if (!title.trim() || !content.trim() || !year) return;
+    const eventDate = month && month !== "none" ? `${year}-${month}-01` : `${year}-01-01`;
+    await addStory({ title, content, date: eventDate });
+    navigate("/memories");
   };
 
   return (
@@ -69,7 +71,7 @@ const CreateStory = () => {
           </div>
 
           <div className="flex gap-3 pt-4">
-            <Button type="submit" className="flex-1" disabled={!title.trim() || !content.trim()}>
+            <Button type="submit" className="flex-1" disabled={!title.trim() || !content.trim() || !year}>
               Save Story
             </Button>
             <Button type="button" variant="outline" onClick={() => navigate(-1)}>

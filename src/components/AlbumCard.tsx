@@ -5,14 +5,22 @@ import { Calendar, Trash2, Image } from "lucide-react";
 interface AlbumCardProps {
   album: Album;
   onDelete?: (id: string) => void;
+  spaceName?: string;
 }
 
-const AlbumCard = ({ album, onDelete }: AlbumCardProps) => {
+const AlbumCard = ({ album, onDelete, spaceName }: AlbumCardProps) => {
   const coverPhoto = album.photos[0];
   const extraCount = album.photos.length - 1;
 
   return (
-    <article className="group bg-card rounded-xl border border-border shadow-warm overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5">
+    <article className="group relative bg-card rounded-xl border border-border shadow-warm overflow-hidden transition-all hover:shadow-lg hover:-translate-y-0.5">
+      {spaceName && (
+        <div className="absolute top-2 left-2 z-10">
+          <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary/90 text-primary-foreground">
+            {spaceName}
+          </span>
+        </div>
+      )}
       {coverPhoto && (
         <div className="aspect-[4/3] overflow-hidden relative">
           <img
