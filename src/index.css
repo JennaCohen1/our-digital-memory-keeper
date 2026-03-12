@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 5%;
+
+    --card: 0 0% 99%;
+    --card-foreground: 0 0% 5%;
+
+    --popover: 0 0% 99%;
+    --popover-foreground: 0 0% 5%;
+
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 15%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 0% 93%;
+    --accent-foreground: 0 0% 10%;
+
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 10%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 15%;
+    --sidebar-primary: 0 0% 10%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 94%;
+    --sidebar-accent-foreground: 0 0% 15%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 0 0% 10%;
+
+    --warm-gold: 0 0% 40%;
+    --warm-rose: 0 0% 50%;
+    --parchment: 0 0% 97%;
+    --ink: 0 0% 5%;
+    --shadow-warm: 0 8px 30px -12px hsl(0 0% 0% / 0.08);
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 0 0% 90%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 85%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 90%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 95%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 90%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 0 0% 90%;
+    --sidebar-primary-foreground: 0 0% 5%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 85%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 0 0% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+  .shadow-warm {
+    box-shadow: var(--shadow-warm);
+  }
+}
+
+/* Book cover animation */
+.book-scene {
+  perspective: 2000px;
+}
+
+.book-container {
+  position: relative;
+  width: min(400px, 80vw);
+  aspect-ratio: 3 / 4;
+  transform-style: preserve-3d;
+}
+
+.book-back-page {
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--card));
+  border-radius: 0 4px 4px 0;
+  border: 1px solid hsl(var(--border));
+}
+
+.book-cover-cream {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 3s cubic-bezier(0.77, 0, 0.175, 1);
+  overflow: hidden;
+  border-radius: 0 4px 4px 0;
+  background: hsl(0 0% 96%);
+  box-shadow:
+    2px 4px 16px -4px hsl(0 0% 30% / 0.12),
+    inset 0 0 0 1px hsl(0 0% 85%);
+}
+
+.book-cover-cream:hover {
+  transform: rotateY(-8deg);
+}
+
+.book-opened .book-cover-cream {
+  transform: rotateY(-165deg);
+  pointer-events: none;
+}
+
+/* Book preview / page-flip */
+.book-preview-scene {
+  perspective: 1500px;
+}
+
+.book-preview-container {
+  position: relative;
+  width: min(400px, 80vw);
+  aspect-ratio: 3 / 4;
+}
+
+.book-page {
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--card));
+  border-radius: 2px;
+  box-shadow: 0 4px 24px -8px hsl(0 0% 0% / 0.4);
+  overflow: hidden;
+  transform-origin: left center;
+  backface-visibility: hidden;
+}
+
+@keyframes page-flip-out {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(-180deg); }
+}
+
+@keyframes page-flip-in {
+  0% { transform: rotateY(180deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+.page-flip-out {
+  animation: page-flip-out 0.6s ease-in-out forwards;
+}
+
+.page-flip-in {
+  animation: page-flip-in 0.6s ease-in-out forwards;
+}
