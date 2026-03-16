@@ -60,11 +60,57 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let isMounted = true;
+    // #region agent log
+    fetch("http://127.0.0.1:7683/ingest/d1ed7b71-be6e-4f7b-88ca-db5fa32ff6c7", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e75e82" },
+      body: JSON.stringify({
+        sessionId: "e75e82",
+        location: "AuthContext.tsx:initStart",
+        message: "auth init started",
+        data: {},
+        timestamp: Date.now(),
+        hypothesisId: "H2",
+      }),
+    }).catch(() => {});
+    // #endregion
     const init = async () => {
-      const { data } = await supabase.auth.getSession();
-      if (!isMounted) return;
-      applySession(data.session ?? null);
-      setLoading(false);
+      try {
+        const { data } = await supabase.auth.getSession();
+        if (!isMounted) return;
+        // #region agent log
+        fetch("http://127.0.0.1:7683/ingest/d1ed7b71-be6e-4f7b-88ca-db5fa32ff6c7", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e75e82" },
+          body: JSON.stringify({
+            sessionId: "e75e82",
+            location: "AuthContext.tsx:getSessionDone",
+            message: "getSession returned",
+            data: { hasSession: !!data?.session },
+            timestamp: Date.now(),
+            hypothesisId: "H2",
+          }),
+        }).catch(() => {});
+        // #endregion
+        applySession(data.session ?? null);
+        setLoading(false);
+      } catch (e) {
+        // #region agent log
+        fetch("http://127.0.0.1:7683/ingest/d1ed7b71-be6e-4f7b-88ca-db5fa32ff6c7", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "e75e82" },
+          body: JSON.stringify({
+            sessionId: "e75e82",
+            location: "AuthContext.tsx:getSessionErr",
+            message: "getSession error",
+            data: { err: String(e) },
+            timestamp: Date.now(),
+            hypothesisId: "H1",
+          }),
+        }).catch(() => {});
+        // #endregion
+        if (isMounted) setLoading(false);
+      }
     };
     void init();
 
