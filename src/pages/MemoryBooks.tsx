@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { BookOpen, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
 import { useSpace } from "@/contexts/SpaceContext";
 import { useSpaces } from "@/hooks/useSpaces";
 
@@ -10,6 +11,7 @@ const MemoryBooks = () => {
   const navigate = useNavigate();
   const { setCurrentSpaceId } = useSpace();
   const { spaces, isLoading, createSpace } = useSpaces();
+  const { toast } = useToast();
   const [newName, setNewName] = useState("");
   const [creating, setCreating] = useState(false);
 
@@ -21,6 +23,12 @@ const MemoryBooks = () => {
       const space = await createSpace.mutateAsync(newName.trim());
       setCurrentSpaceId(space.id);
       navigate("/");
+    } catch (err) {
+      toast({
+        title: "Could not create book",
+        description: err instanceof Error ? err.message : "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
     } finally {
       setCreating(false);
       setNewName("");
