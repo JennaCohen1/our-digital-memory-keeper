@@ -19,6 +19,10 @@ export default function AuthGate({ children }: { children: ReactNode }) {
     }),
   }).catch(() => {});
   // #endregion
+  if (loading) {
+    return null;
+  }
+
   if (!isSignedIn) {
     return <SignIn />;
   }

@@ -27,7 +27,9 @@ if (!supabaseUrl || !supabaseAnonKey) {
 export const isSupabaseConfigured =
   typeof supabaseUrl === "string" && !!supabaseUrl && typeof supabaseAnonKey === "string" && !!supabaseAnonKey;
 
-export const supabase = createClient(supabaseUrl ?? "", supabaseAnonKey ?? "");
+export const supabase = createClient(supabaseUrl ?? "", supabaseAnonKey ?? "", {
+  auth: { flowType: "implicit" },
+});
 // #region agent log
 fetch("http://127.0.0.1:7683/ingest/d1ed7b71-be6e-4f7b-88ca-db5fa32ff6c7", {
   method: "POST",
