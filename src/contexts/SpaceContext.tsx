@@ -45,7 +45,7 @@ export function SpaceProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!user) setState(null);
     else setState(getStoredSpaceId(user.id));
-  }, [user?.id]);
+  }, [user]);
 
   const setCurrentSpaceId = useCallback(
     (id: string | null) => {
