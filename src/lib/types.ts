@@ -7,21 +7,36 @@ export interface Photo {
 export interface Album {
   id: string;
   title: string;
-  date?: string;
+  date: string;
   photos: Photo[];
   createdAt: string;
-  spaceId?: string;
-  createdBy?: string;
+  spaceId: string;
+  createdBy: string;
 }
 
 export interface Story {
   id: string;
   title: string;
   content: string;
-  date?: string;
+  date: string;
   createdAt: string;
-  spaceId?: string;
-  createdBy?: string;
+  spaceId: string;
+  createdBy: string;
+}
+
+export type SpaceMemberRole = "owner" | "editor" | "viewer";
+
+export interface SpaceMember {
+  spaceId: string;
+  userId: string;
+  role: SpaceMemberRole;
+}
+
+export interface AlbumPhoto {
+  albumId: string;
+  assetId: string;
+  caption?: string;
+  sortOrder: number;
 }
 
 export interface Space {

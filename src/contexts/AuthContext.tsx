@@ -12,9 +12,9 @@ import { supabase } from "@/lib/supabaseClient";
 
 export interface User {
   id: string;
-  email: string;
-  name: string;
-  picture?: string;
+  primary_email: string;
+  display_name: string;
+  avatar_url?: string;
 }
 
 interface AuthContextValue {
@@ -49,9 +49,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const mappedUser: User = {
       id: supaUser.id,
-      email: supaUser.email ?? "",
-      name: nameFromMeta ?? supaUser.email ?? "Unknown user",
-      picture: pictureFromMeta,
+      primary_email: supaUser.email ?? "",
+      display_name: nameFromMeta ?? supaUser.email ?? "Unknown user",
+      avatar_url: pictureFromMeta,
     };
 
     setUserState(mappedUser);
