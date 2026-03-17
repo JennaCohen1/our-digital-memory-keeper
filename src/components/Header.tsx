@@ -99,16 +99,16 @@ const Header = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="rounded-full">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src={user.picture} alt={user.name} />
+                    <AvatarImage src={user.avatar_url} alt={user.display_name} />
                     <AvatarFallback className="text-xs">
-                      {user.name.slice(0, 2).toUpperCase()}
+                      {user.display_name.slice(0, 2).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
                 <div className="px-2 py-1.5 text-sm text-muted-foreground truncate">
-                  {user.email}
+                  {user.primary_email}
                 </div>
                 <Link to="/my-memories">
                   <DropdownMenuItem className="cursor-pointer">

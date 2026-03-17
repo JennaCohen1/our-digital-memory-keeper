@@ -10,7 +10,8 @@ import MemoryDatePicker from "@/components/MemoryDatePicker";
 
 const CreateStory = () => {
   const navigate = useNavigate();
-  const { addStory } = useStories();
+  const { currentSpaceId } = useSpace();
+  const { addStory } = useStories(currentSpaceId);
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
