@@ -13,6 +13,11 @@ export const isSupabaseConfigured =
   typeof supabaseUrl === "string" && !!supabaseUrl && typeof supabaseAnonKey === "string" && !!supabaseAnonKey;
 
 export const supabase = createClient(supabaseUrl ?? "", supabaseAnonKey ?? "", {
-  auth: { flowType: "implicit" },
+  auth: {
+    flowType: "pkce",
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+  },
 });
 

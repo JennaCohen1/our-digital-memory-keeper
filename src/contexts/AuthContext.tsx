@@ -59,27 +59,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    let isMounted = true;
-    const init = async () => {
-      try {
-        const { data } = await supabase.auth.getSession();
-        if (!isMounted) return;
-        applySession(data.session ?? null);
-        setLoading(false);
-      } catch {
-        if (isMounted) setLoading(false);
-      }
-    };
-    void init();
+    // When returning from an OAuth redirect (PKCE), the URL contains ?code=…
+    // _initialize() may resolve INITIAL_SESSION with a stale session from
+    // localStorage before the code exchange finishes.  We must keep loading
+    // true until SIGNED_IN fires, which only happens after the exchange
+    // completes with a fresh access token.
+    const pendingCodeExchange = new URLSearchParams(window.location.search).has("code");
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
       applySession(session);
+
+      if (event === "INITIAL_SESSION" && !pendingCodeExchange) {
+        // Normal page load — no OAuth redirect in progress.
+        setLoading(false);
+      } else if (event === "SIGNED_IN" || event === "SIGNED_OUT") {
+        // SIGNED_IN: fresh session after code exchange (or a normal sign-in).
+        // SIGNED_OUT: session was cleared (covers code-exchange failure).
+        setLoading(false);
+      }
     });
 
     return () => {
-      isMounted = false;
       subscription.unsubscribe();
     };
   }, [applySession]);
@@ -88,7 +90,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: window.location.origin,
+        redirectTo: `${window.location.origin}/books`,
       },
     });
   }, []);
@@ -97,7 +99,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: window.location.origin,
+        emailRedirectTo: `${window.location.origin}/books`,
       },
     });
   }, []);
