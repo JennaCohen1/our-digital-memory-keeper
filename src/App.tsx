@@ -7,6 +7,7 @@ import AuthGate from "@/components/AuthGate";
 import RequireSpace from "@/components/RequireSpace";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { isSupabaseConfigured } from "@/lib/supabaseClient";
+import { VersionChecker } from "@/components/VersionChecker";
 import Index from "./pages/Index.tsx";
 import Memories from "./pages/Memories.tsx";
 import MyMemories from "./pages/MyMemories.tsx";
@@ -40,6 +41,7 @@ const App = () =>
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <VersionChecker />
         <BrowserRouter>
           <AuthGate>
             <Routes>
