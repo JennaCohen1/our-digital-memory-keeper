@@ -34,19 +34,42 @@ export function useSpaces() {
   const createSpace = useMutation({
     mutationFn: async (name: string): Promise<Space> => {
       if (!user?.id) throw new Error("Not signed in");
+
+      // Insert the space. The DB trigger adds the creator to space_members,
+      // but the RETURNING data may be filtered by the SELECT RLS policy before
+      // the trigger-inserted row is visible.  So we try .select() first and
+      // fall back to a separate query through space_members.
       const { data, error } = await supabase
         .from("spaces")
         .insert({ name, created_by: user.id })
         .select("id, name, created_by, created_at")
         .single();
-      if (error) throw error;
-      const row = data as { id: string; name: string; created_by: string; created_at: string };
-      return {
-        id: row.id,
-        name: row.name,
-        createdBy: row.created_by,
-        createdAt: row.created_at,
-      };
+
+      if (!error && data) {
+        const row = data as { id: string; name: string; created_by: string; created_at: string };
+        return { id: row.id, name: row.name, createdBy: row.created_by, createdAt: row.created_at };
+      }
+
+      // Fallback: the insert likely succeeded but the select was blocked by
+      // RLS timing.  Query through space_members where the trigger has now
+      // committed the membership row.
+      const { data: rows, error: queryError } = await supabase
+        .from("space_members")
+        .select("spaces(id, name, created_by, created_at)")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false })
+        .limit(5);
+
+      if (queryError) throw queryError;
+
+      const match = (rows ?? [])
+        .map((r) => (r as { spaces: { id: string; name: string; created_by: string; created_at: string } | null }).spaces)
+        .filter(Boolean)
+        .find((s) => s!.name === name && s!.created_by === user.id);
+
+      if (!match) throw error ?? new Error("Space was created but could not be retrieved");
+
+      return { id: match.id, name: match.name, createdBy: match.created_by, createdAt: match.created_at };
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["spaces", user?.id] });
